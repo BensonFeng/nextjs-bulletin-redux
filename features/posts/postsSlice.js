@@ -1,34 +1,23 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 import { sub } from "date-fns";
+import axios from "axios";
 
-const initialState = [
-  {
-    id: "1",
-    title: "Redux toolkit",
-    content: "A modern tool to use redux.",
-    date: sub(new Date(), { minutes: 10 }).toISOString(),
-    reactions: {
-      thumbsup: 0,
-      wow: 0,
-      heart: 0,
-      rocket: 0,
-      coffee: 0,
-    },
-  },
-  {
-    id: "2",
-    title: "NVDIA graphics card",
-    content: "Huge GPU price drop.",
-    date: sub(new Date(), { minutes: 5 }).toISOString(),
-    reactions: {
-      thumbsup: 0,
-      wow: 0,
-      heart: 0,
-      rocket: 0,
-      coffee: 0,
-    },
-  },
-];
+const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
+
+const initialState = {
+  posts: [],
+  status: "idle" | "pending" | "succeeded" | "failed",
+  error: null,
+};
+
+export const fetchPosts = createAsyncThunk("posts/fethPosts", async () => {
+  try {
+    const response = await axios.get(POSTS_URL);
+    return [...response.data];
+  } catch (error) {
+    return error.message;
+  }
+});
 
 const postsSlice = createSlice({
   name: "posts",
@@ -36,7 +25,7 @@ const postsSlice = createSlice({
   reducers: {
     postAdded: {
       reducer: (state, action) => {
-        state.push(action.payload);
+        state.posts.push(action.payload);
       },
       prepare: (title, content, userId) => {
         return {
@@ -59,13 +48,13 @@ const postsSlice = createSlice({
     },
     reactionAdded: (state, action) => {
       const { postId, reaction } = action.payload;
-      const existingPost = state.find((post) => post.id === postId);
+      const existingPost = state.posts.find((post) => post.id === postId);
       if (existingPost) {
         existingPost.reactions[reaction]++;
       }
     },
   },
 });
-export const selectAllPosts = (state) => state.posts;
+export const selectAllPosts = (state) => state.posts.posts;
 export const { postAdded, reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;
