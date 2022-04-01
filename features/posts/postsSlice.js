@@ -6,16 +6,16 @@ const POSTS_URL = "https://jsonplaceholder.typicode.com/posts";
 
 const initialState = {
   posts: [],
-  status: "idle" | "pending" | "succeeded" | "failed",
+  status: "idle", //'idle' | 'loading' | 'succeeded' | 'failed'
   error: null,
 };
 
-export const fetchPosts = createAsyncThunk("posts/fethPosts", async () => {
+export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   try {
     const response = await axios.get(POSTS_URL);
     return [...response.data];
-  } catch (error) {
-    return error.message;
+  } catch (err) {
+    return err.message;
   }
 });
 
@@ -55,20 +55,20 @@ const postsSlice = createSlice({
     },
   },
   extraReducers: {
-    [fetchPosts.pending]: (state, action) => {
+    [fetchPosts.pending]: (state) => {
       state.status = "loading";
     },
     [fetchPosts.fulfilled]: (state, action) => {
       state.status = "succeeded";
       let min = 1;
       const loadedPosts = action.payload.map((post) => {
-        post.date = sub(new Date(), { minutes: min++ }).toISOString;
+        post.date = sub(new Date(), { minutes: min++ }).toISOString();
         post.reactions = {
           thumbsUp: 0,
-          hooray: 0,
+          wow: 0,
           heart: 0,
           rocket: 0,
-          eyes: 0,
+          coffee: 0,
         };
         return post;
       });
