@@ -141,6 +141,16 @@ const postsSlice = createSlice({
       const posts = state.posts.filter((post) => post.id !== id);
       state.posts = [...posts, action.payload];
     },
+    [deletePost.fulfilled]: (state, action) => {
+      if (!action.payload?.id) {
+        console.log("Delete could not complete");
+        console.log(action.payload);
+        return;
+      }
+      const { id } = action.payload;
+      const posts = state.posts.filter((post) => post.id !== id);
+      state.posts = posts;
+    },
   },
 });
 
