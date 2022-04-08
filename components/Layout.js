@@ -1,11 +1,9 @@
-import { Outlet } from "react-router-dom";
-
-const Layout = () => {
+import Header from "./Header";
+const Layout = ({ children }) => {
   return (
     <>
-      <main className="App">
-        <Outlet />
-      </main>
+      <Header />
+      <main className="App">{children}</main>
     </>
   );
 };
