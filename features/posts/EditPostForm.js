@@ -12,7 +12,7 @@ const EditPostForm = () => {
   const router = useRouter();
 
   const post = useSelector((state) => selectPostById(state, Number(postId)));
-  const users = useSelector(selectAllUsers);
+  const users = useSelector((state) => state.users);
 
   const [title, setTitle] = useState(post?.title);
   const [content, setContent] = useState(post?.body);
