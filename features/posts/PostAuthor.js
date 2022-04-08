@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { selectAllUser } from "../users/usersSlice";
+import { selectAllUsers } from "../users/usersSlice";
 
 const PostAuthor = ({ userId }) => {
-  const users = useSelector(selectAllUser);
+  const users = useSelector(selectAllUsers);
 
   const author = users.find((user) => user.id === userId);
 

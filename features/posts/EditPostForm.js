@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectPostById, updatePost, deletePost } from "./postsSlice";
 import { useRouter } from "next/router";
 
-import { selectAllUsers } from "../users/usersSlice";
-
 const EditPostForm = () => {
   const {
     query: { postId },
