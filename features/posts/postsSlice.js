@@ -58,6 +58,7 @@ export const deletePost = createAsyncThunk(
     }
   }
 );
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -103,7 +104,7 @@ const postsSlice = createSlice({
       const loadedPosts = action.payload.map((post) => {
         post.date = sub(new Date(), { minutes: min++ }).toISOString();
         post.reactions = {
-          thumbsUp: 0,
+          thumbsup: 0,
           wow: 0,
           heart: 0,
           rocket: 0,
