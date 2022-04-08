@@ -5,10 +5,14 @@ import PostAuthor from "./PostAuthor";
 import TimeAgo from "./TimeAgo";
 import ReactionButtons from "./ReactionButtons";
 
-const SinglePostPage = () => {
-  //retrieve postId
+import { useRouter } from "next/router";
 
-  const post = useSelector((state) => selectPostById(state, postId));
+const SinglePostPage = () => {
+  const {
+    query: { postId },
+  } = useRouter();
+
+  const post = useSelector((state) => selectPostById(state, Number(postId)));
 
   if (!post) {
     return (
