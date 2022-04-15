@@ -1,3 +1,13 @@
+# Bullitin CRUD Application
+
+### [Live Site] (https://nextjs-bulletin-redux.vercel.app/)
+#### Screenshot
+https://ibb.co/qC96wL7
+
+https://ibb.co/4Y7bbWL
+## Introduction
+Using redux, we created a bulletin with CRUD operations and API fetching. Redux toolkits can help to cut state management boilerplate by a quarter. This resulted in better code structure and readability. 
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
