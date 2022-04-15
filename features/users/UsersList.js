@@ -5,11 +5,11 @@ import Link from "next/link";
 const UsersList = () => {
   const users = useSelector(selectAllUsers);
 
-  const renderedUsers = users.map((user) => {
+  const renderedUsers = users.map((user) => (
     <li key={user.id}>
       <Link href={`/user/${user.id}`}>{user.name}</Link>
-    </li>;
-  });
+    </li>
+  ));
   return (
     <section>
       <h2>Users</h2>
