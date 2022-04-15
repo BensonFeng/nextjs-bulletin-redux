@@ -40,6 +40,12 @@ nav {
   display: flex;
   justify-content: flex-end;
 }
+nav button {
+  top: 1.2rem;
+  position: relative;
+
+  background-color: none;
+}
 
 nav ul {
   padding-top: 1.2rem;

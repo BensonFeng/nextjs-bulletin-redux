@@ -1,6 +1,10 @@
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { increaseCount, getCount } from "../features/posts/postsSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const count = useSelector(getCount);
   return (
     <header className="Header">
       <h1>Redux Blog</h1>
@@ -16,6 +20,7 @@ const Header = () => {
             <Link href="user">Users</Link>
           </li>
         </ul>
+        <button onClick={() => dispatch(increaseCount())}>{count}</button>
       </nav>
     </header>
   );
